@@ -1,0 +1,16 @@
+{
+    title: {
+        text: '$title',
+    },
+    legend: {
+        data: $legendData
+    },
+    xAxis: {
+        type: 'category',
+        data: $axisData
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: $seriesData
+}
