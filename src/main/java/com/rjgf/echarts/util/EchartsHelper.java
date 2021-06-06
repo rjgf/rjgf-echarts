@@ -21,8 +21,7 @@ public class EchartsHelper {
     private static String url = "http://localhost:6666";
 
     /**
-     * 获取图表的图片信息
-     *
+     * 获取图表的base64 信息
      * @return
      */
     public static String getEChartsImg(String option) throws IOException {
@@ -50,6 +49,6 @@ public class EchartsHelper {
             String string = jsonObject.getStr("msg");
             throw new RuntimeException(string);
         }
-        return FileUtil.getImgUrl(base64);
+        return base64;
     }
 }

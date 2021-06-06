@@ -1,6 +1,7 @@
 {
     title: {
         text: '$title',
+        left: 'center'
     },
     legend: {
         data: $legendData

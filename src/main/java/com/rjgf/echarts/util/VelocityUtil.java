@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class VelocityUtil {
 
-    private static final String path = VelocityUtil.class.getClassLoader().getResource("").getPath();
+    private static final String DOT_VM = ".vm";
 
     /**
      * 模板数据生成
@@ -32,7 +32,9 @@ public class VelocityUtil {
         /* 1.初始化 Velocity */
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(VelocityEngine.RESOURCE_LOADER, "file");
-        velocityEngine.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, path + "static/echarts");
+        velocityEngine.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, "");
+        velocityEngine.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, "");
+        velocityEngine.setProperty("file.resource.loader.class","org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         velocityEngine.init();
 
         /* 2.创建一个上下文对象 */
@@ -41,13 +43,26 @@ public class VelocityUtil {
         /* 3.添加你的数据对象到上下文 */
         datas.entrySet().forEach(s -> context.put(s.getKey(), s.getValue()));
         /* 4.选择一个模板 */
-        Template template = velocityEngine.getTemplate(templateFileName);
+        Template template = velocityEngine.getTemplate(templateFilePath(templateFileName));
         /* 5.将你的数据与模板合并，产生输出内容 */
         StringWriter sw = new StringWriter();
         template.merge(context, sw);
         return sw.toString();
     }
 
+
+    /**
+     * 获取最终的路径 前缀
+     * @param filePath
+     * @return
+     */
+    public static String templateFilePath(String filePath) {
+        String prefix = "/static/echarts/";
+        if (null == filePath || filePath.contains(DOT_VM)) {
+            return prefix + filePath;
+        }
+        return prefix + filePath + DOT_VM;
+    }
 
     public static void main(String[] args) throws IOException {
         Map<String, Object> datas = new HashMap<>();
@@ -62,7 +77,7 @@ public class VelocityUtil {
                 "                {value: 135, name: '视频广告'},\n" +
                 "                {value: 1548, name: '搜索引擎'}\n" +
                 "            ]");
-        String temp = generateString("pie.vm", datas);
+        String temp = generateString("/static/echarts/pie.vm", datas);
         System.out.println(temp);
     }
 }

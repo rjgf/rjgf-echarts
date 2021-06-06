@@ -1,7 +1,8 @@
 {
     title: {
-        text: $text,
-        subtext: $subtext
+        text: '$title',
+        subtext: '$subTitle',
+        left: 'center'
     },
     tooltip: {
         trigger: 'axis',
@@ -24,7 +25,10 @@
     },
     yAxis: {
         type: 'value',
-        boundaryGap: [0, 0.01]
+        boundaryGap: [0, 0.01],
+        axisLabel :{
+            formatter: '{value}$unit'
+        }
     },
     series: $seriesData
 }

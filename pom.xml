@@ -31,14 +31,25 @@
         </dependency>
 
     </dependencies>
+    <!-- 配置部署构建到私服 -->
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>rdc-releases</id>-->
+            <!--<url>https://repo.rdc.aliyun.com/repository/120621-release-HldziT/</url>-->
+            <!--<name>rdc-releases</name>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--<id>rdc-snapshots</id>-->
+            <!--<url>https://repo.rdc.aliyun.com/repository/120621-snapshot-8OYdpv/</url>-->
+            <!--<name>rdc-snapshots</name>-->
+        <!--</snapshotRepository>-->
+    <!--</distributionManagement>-->
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
+    <distributionManagement>
+        <repository>
+            <id>3rdParty</id>
+            <url>http://192.168.110.240:9091/repository/3rdParty/</url>
+            <name>3rdParty</name>
+        </repository>
+    </distributionManagement>
 </project>

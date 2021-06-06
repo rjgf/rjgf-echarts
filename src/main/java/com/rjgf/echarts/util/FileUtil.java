@@ -19,8 +19,7 @@ public class FileUtil {
     /**
      * 图片的保存地址
      */
-    private static String imgPath = "E:\\Users\\xulia\\润建\\app 大数据\\word 模块\\img";
-
+    private static String imgPath = "E:\\Users\\xulia\\公司项目\\润建\\app大数据\\报告模块\\img\\";
 
 
     /**
@@ -32,6 +31,29 @@ public class FileUtil {
      */
     public static byte[] base64ToByte(String base64) throws IOException {
         BASE64Decoder decoder = new BASE64Decoder();
+        byte[] bytes = decoder.decodeBuffer(base64);
+        if (base64 == null) {
+            return null;
+        }
+        String imgUrl = imgPath + UUID.fastUUID() + ".png";
+        File file = new File(imgUrl);
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(bytes);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return decoder.decodeBuffer(base64);
     }
 
@@ -44,7 +66,8 @@ public class FileUtil {
         if (base64 == null) {
             return null;
         }
-        File file = new File(imgPath + UUID.fastUUID() + ".png");
+        String imgUrl = imgPath + UUID.fastUUID() + ".png";
+        File file = new File(imgUrl);
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(file);
@@ -62,6 +85,6 @@ public class FileUtil {
                 }
             }
         }
-        return null;
+        return imgUrl;
     }
 }
