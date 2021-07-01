@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.rjgf</groupId>
     <artifactId>rjgf-echarts</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>rjgf-echarts</name>
     <description>echarts 操作工具</description>
 
